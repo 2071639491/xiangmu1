@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,40 +14,40 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.xiangmu1.R;
 import com.example.xiangmu1.frist.bean.FristBean;
 
 import java.util.ArrayList;
 
-public class FristChanAdapter extends DelegateAdapter.Adapter {
+public class FristBrandAdapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<FristBean.DataBean.ChannelBean> list;
-    private ColumnLayoutHelper columnLayoutHelper;
+    private ArrayList<FristBean.DataBean.BrandListBean> list;
+    private GridLayoutHelper gridLayoutHelper;
 
-    public FristChanAdapter(Context context, ArrayList<FristBean.DataBean.ChannelBean> list, ColumnLayoutHelper columnLayoutHelper) {
+    public FristBrandAdapter(Context context, ArrayList<FristBean.DataBean.BrandListBean> list, GridLayoutHelper gridLayoutHelper) {
         this.context = context;
         this.list = list;
-        this.columnLayoutHelper = columnLayoutHelper;
+        this.gridLayoutHelper = gridLayoutHelper;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return columnLayoutHelper;
+        return gridLayoutHelper;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.chan_item, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.brand_item, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder holder1= (ViewHolder) holder;
-        holder1.tv.setText(list.get(position).getName());
-        Glide.with(context).load(list.get(position).getIcon_url()).into(holder1.img);
+
     }
 
     @Override

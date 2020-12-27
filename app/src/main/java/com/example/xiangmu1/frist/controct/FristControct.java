@@ -16,4 +16,5 @@ public class FristControct {
     public interface getBannerModel{
         <T> void getBannerModel(String url, HttpCallBack<T> callBack);
     }
+
 }

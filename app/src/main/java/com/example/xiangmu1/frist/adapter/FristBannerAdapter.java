@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.xiangmu1.R;
 import com.example.xiangmu1.frist.bean.FristBean;
@@ -33,7 +34,7 @@ public class FristBannerAdapter extends DelegateAdapter.Adapter {
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return linearLayoutHelper;
+        return new SingleLayoutHelper();
     }
 
     @NonNull

@@ -21,16 +21,22 @@ import com.example.xiangmu1.R;
 import com.example.xiangmu1.frist.adapter.FristBannerAdapter;
 import com.example.xiangmu1.frist.adapter.FristBrandAdapter;
 import com.example.xiangmu1.frist.adapter.FristBrandCkAdapter;
+import com.example.xiangmu1.frist.adapter.FristCateAdapter;
+import com.example.xiangmu1.frist.adapter.FristCateHeaderAdapter;
 import com.example.xiangmu1.frist.adapter.FristChanAdapter;
+import com.example.xiangmu1.frist.adapter.FristHotGoodAdapter;
 import com.example.xiangmu1.frist.adapter.FristHotGoodHeaderAdapter;
 import com.example.xiangmu1.frist.adapter.FristNewGoodAdapter;
 import com.example.xiangmu1.frist.adapter.FristNewGoodHeaderAdapter;
 import com.example.xiangmu1.frist.adapter.FristSouAdapter;
+import com.example.xiangmu1.frist.adapter.FristTopPicAdapter;
+import com.example.xiangmu1.frist.adapter.FristTopPicHeaderAdapter;
 import com.example.xiangmu1.frist.bean.FristBean;
 import com.example.xiangmu1.frist.controct.FristControct;
 import com.example.xiangmu1.frist.presenter.FristPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Retrofit;
 
@@ -54,6 +60,20 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
     private ArrayList<FristBean.DataBean.NewGoodsListBean> newGoodsListBeans;
     private FristNewGoodAdapter fristNewGoodAdapter;
     private FristHotGoodHeaderAdapter fristHotGoodHeaderAdapter;
+    private ArrayList<FristBean.DataBean.HotGoodsListBean> hotGoodsListBeans;
+    private FristHotGoodAdapter fristHotGoodAdapter;
+    private FristTopPicHeaderAdapter fristTopPicHeaderAdapter;
+    private ArrayList<FristBean.DataBean.TopicListBean> listBeans;
+    private FristTopPicAdapter fristTopPicAdapter;
+
+    private FristCateHeaderAdapter fristCateHeaderAdapter;
+    private String listBeans1;
+    private LinearLayoutHelper linearLayoutHelper1;
+    private FristCateHeaderAdapter fristCateHeaderAdapter1;
+    private GridLayoutHelper gridLayoutHelper;
+    private FristCateAdapter fristCateAdapter;
+    private int size;
+    private ArrayList<FristBean.DataBean.CategoryListBean> categoryListBeans;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +114,12 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
         //hotgood
         inithotgoodheader();
         inithotgood();
+        //toppic
+        inittoppicheader();
+        inittoppic();
+        //cate
+        initcateheader();
+        initcate();
 
         adapter = new DelegateAdapter(layoutManager);
         adapter.addAdapter(fristSouAdapter);
@@ -104,8 +130,93 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
         adapter.addAdapter(fristNewGoodHeaderAdapter);
         adapter.addAdapter(fristNewGoodAdapter);
         adapter.addAdapter(fristHotGoodHeaderAdapter);
-        frist_rlv.setAdapter(adapter);
+        adapter.addAdapter(fristHotGoodAdapter);
+        adapter.addAdapter(fristTopPicHeaderAdapter);
+        adapter.addAdapter(fristTopPicAdapter);
 
+        frist_rlv.setAdapter(adapter);
+    }
+
+    private void initcate() {
+//        /**
+//         设置Grid布局
+//         */
+//        gridLayoutHelper = new GridLayoutHelper(2);
+//        // 在构造函数设置每行的网格个数
+//
+//        // 公共属性
+//        gridLayoutHelper.setItemCount(7);// 设置布局里Item个数
+////        gridLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+////        gridLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+//
+////        gridLayoutHelper.setAspectRatio(6);// 设置设置布局内每行布局的宽与高的比
+//
+//        // gridLayoutHelper特有属性（下面会详细说明）
+//        gridLayoutHelper.setWeights(new float[]{50,50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
+//        gridLayoutHelper.setVGap(5);// 控制子元素之间的垂直间距
+//        gridLayoutHelper.setHGap(5);// 控制子元素之间的水平间距
+//        gridLayoutHelper.setAutoExpand(false);//是否自动填充空白区域
+//        gridLayoutHelper.setSpanCount(2);// 设置每行多少个网格
+//        gridLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
+
+
+    }
+
+    private void initcateheader() {
+        /**
+         设置线性布局
+         */
+        linearLayoutHelper1 = new LinearLayoutHelper();
+        // 创建对应的LayoutHelper对象
+
+        // 所有布局的公共属性（属性会在下面详细说明）
+        linearLayoutHelper1.setItemCount(1);// 设置布局里Item个数
+        linearLayoutHelper1.setPadding(0,0,0,0);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+//        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+//        linearLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
+
+
+        // linearLayoutHelper特有属性
+        linearLayoutHelper1.setDividerHeight(1); // 设置每行Item的距离
+
+
+    }
+
+    private void inittoppic() {
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        // 所有布局的公共属性（属性会在下面详细说明）
+
+        linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
+        linearLayoutHelper.setPadding(0,20,0,0);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+//        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+//        linearLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
+
+
+        // linearLayoutHelper特有属性
+//        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
+
+        listBeans = new ArrayList<>();
+        fristTopPicAdapter = new FristTopPicAdapter(getActivity(), listBeans, linearLayoutHelper);
+    }
+
+    private void inittoppicheader() {
+        /**
+         设置线性布局
+         */
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        // 创建对应的LayoutHelper对象
+
+        // 所有布局的公共属性（属性会在下面详细说明）
+        linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
+        linearLayoutHelper.setPadding(0,0,0,0);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+//        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+//        linearLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
+
+
+        // linearLayoutHelper特有属性
+        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
+
+        fristTopPicHeaderAdapter = new FristTopPicHeaderAdapter(getActivity(), linearLayoutHelper);
     }
 
     private void inithotgood() {
@@ -123,7 +234,8 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
         // linearLayoutHelper特有属性
         linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
 
-        
+        hotGoodsListBeans = new ArrayList<>();
+        fristHotGoodAdapter = new FristHotGoodAdapter(getActivity(), hotGoodsListBeans, linearLayoutHelper);
     }
 
     private void inithotgoodheader() {
@@ -135,7 +247,7 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
 
         // 所有布局的公共属性（属性会在下面详细说明）
         linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
-        linearLayoutHelper.setPadding(0,20,0,0);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        linearLayoutHelper.setPadding(0,30,0,0);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
 //        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
 //        linearLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
 
@@ -315,7 +427,49 @@ public class FristFragment extends Fragment implements FristControct.getBannerVi
         fristBrandCkAdapter.notifyDataSetChanged();
         newGoodsListBeans.addAll(fristBean.getData().getNewGoodsList());
         fristNewGoodAdapter.notifyDataSetChanged();
-//        adapter.notifyDataSetChanged();
+
+        hotGoodsListBeans.addAll(fristBean.getData().getHotGoodsList());
+        fristHotGoodAdapter.notifyDataSetChanged();
+
+        listBeans.addAll(fristBean.getData().getTopicList());
+        fristTopPicAdapter.notifyDataSetChanged();
+
+        categoryListBeans = new ArrayList<>();
+
+        List<FristBean.DataBean.CategoryListBean> categoryList = fristBean.getData().getCategoryList();
+        categoryListBeans.clear();
+        categoryListBeans.addAll(categoryList);
+        for (int i = 0; i < categoryListBeans.size(); i++) {
+            String name = categoryListBeans.get(i).getName();
+            fristCateHeaderAdapter1 = new FristCateHeaderAdapter(getActivity(), name, linearLayoutHelper1);
+            fristCateHeaderAdapter1.notifyDataSetChanged();
+
+
+            GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(2);
+            // 在构造函数设置每行的网格个数
+
+            // 公共属性
+            gridLayoutHelper.setItemCount(7);// 设置布局里Item个数
+//        gridLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+//        gridLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+
+//        gridLayoutHelper.setAspectRatio(6);// 设置设置布局内每行布局的宽与高的比
+
+            // gridLayoutHelper特有属性（下面会详细说明）
+            gridLayoutHelper.setWeights(new float[]{50,50});//设置每行中 每个网格宽度 占 每行总宽度 的比例
+            gridLayoutHelper.setVGap(5);// 控制子元素之间的垂直间距
+            gridLayoutHelper.setHGap(5);// 控制子元素之间的水平间距
+            gridLayoutHelper.setAutoExpand(false);//是否自动填充空白区域
+            gridLayoutHelper.setSpanCount(2);// 设置每行多少个网格
+            gridLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
+
+
+
+            List<FristBean.DataBean.CategoryListBean.GoodsListBean> goodsList = categoryListBeans.get(i).getGoodsList();
+            fristCateAdapter = new FristCateAdapter(getActivity(),(ArrayList<FristBean.DataBean.CategoryListBean.GoodsListBean>) goodsList,gridLayoutHelper);
+            adapter.addAdapter(fristCateHeaderAdapter1);
+            adapter.addAdapter(fristCateAdapter);
+        }
     }
 
     @Override
